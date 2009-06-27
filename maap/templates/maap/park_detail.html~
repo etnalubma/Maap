@@ -1,0 +1,29 @@
+{% extends 'maap/base.html' %}
+{% load markup tagging_tags %}
+
+{% block js_onload %}
+
+    baselayer = new Maap.Layer('base',{});
+    point = {{object.point.json_dict}};
+    baselayer.addPoint(point);
+    state.map.addLayers(baselayer.getLayers());
+    state.layers['base'] = baselayer;
+    
+{% endblock %}
+
+
+{% block title %}{{object.title}}{% endblock %}
+{% block content %}
+    
+    <h1>{{object.title}}</h1> 
+    <p class="discreet">    
+    {% tags_for_object object as tags%}
+    {% for tag in tags%}
+    {{tag}}
+    {% endfor %}
+    </p>
+
+    <p>{{object.description|markdown }}</p>
+
+{% endblock %}
+

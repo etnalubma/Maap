@@ -1,0 +1,14 @@
+tunning
+--Esta línea y las que están debajo serán ignoradas--
+
+M    maap/media/modules/point.js
+M    maap/media/modules/layer.js
+M    maap/views.py
+M    maap/models.py
+M    maap/urls.py
+M    maap/templates/index.html
+A    maap/templates/maap
+A    maap/templates/maap/park_detail.html
+A    maap/templates/maap/list_by_tag.html
+A    maap/templates/maap/park_list.html
+A    maap/templates/maap/base.html

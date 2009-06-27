@@ -1,0 +1,80 @@
+{% extends 'maap/base.html' %}
+{% block title %}
+Bienvenido
+{% endblock %}
+{% block css%}
+{% endblock %}
+
+{% block js_onload %}
+     function(){
+
+
+        // Show layer event handler
+        $('.show-layer').click(function () {
+            button = $(this)
+            parent = button.parent()
+            id = parent.attr('id');
+            state.loadLayer(id, false, function(layer){
+                layer.show();
+
+                // toogle view
+                parent.children('.hide-layer').css('display','inline');
+                button.css('display','none');
+            
+            });
+            
+            return false;
+        })
+
+        // Hide layer event handler
+        $('.hide-layer').click(function () {
+            parent = $(this).parent()
+            id = parent.attr('id');
+            
+            state.layers[id].hide();   
+
+            // toogle view
+            parent.children('.show-layer').css('display','inline');
+            $(this).css('display','none');
+            
+            return false;
+        })
+    } 
+
+)	
+{% endblock %}
+
+</head>
+<body>
+
+{% block content %}
+<div id="capas">
+    {% if layer_list %}
+    <h3> Capas </h3>
+    <ul class="actions">
+        {% for layer in layer_list %}
+        
+        <li id="{{layer.id}}">
+
+        <span>{{ layer.name }}  </span>
+        <a href="#" class="show-layer">
+            Mostrar
+        </a>
+        <a href="#" class="hide-layer" style="display:none">
+            Ocultar  
+        </a>
+        </li>
+
+
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+
+</body>
+</body>
+
+

@@ -1,0 +1,25 @@
+{% extends 'master.html' %}
+{% load markup tagging_tags %}
+{% block title %}Lista de parques{%endblock%}
+{% block content %}
+
+	<h1 class="documentFirstHeading">Parques etiquetados con <em>{{tag}}</em></h1>
+    {% tagged_objects tag in maap.Parque as objs %}
+	{% if objs %}
+		<ul id="obj-list">
+			{% for object in objs %}
+			<li>
+                <h3><a href="{% url maap.views.park_detail object.pk %}">{{object.title}}</a></h3>
+                <p class="discreet tags">    
+                {% tags_for_object object as tags%}
+                {% for tag in tags%}
+                <a href="{% url maap.views.obj_list_by_tag tag %}">{{tag}}</a>
+                {% endfor %}
+                </p>
+        	</li>
+	        {% endfor %}	
+		</ul>
+    {% endif %}
+
+{% endblock %}
+

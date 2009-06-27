@@ -1,0 +1,26 @@
+Metadata-Version: 1.0
+Name: maap
+Version: 0.1dev-r33
+Summary: Applications for Map
+Home-page: http://www.revolucionesweb.com.ar
+Author: Francisco Herrero
+Author-email: francisco.herrero@gmail.com
+License: UNKNOWN
+Description: Introduction
+        ============
+        
+        
+        
+        Changelog
+        =========
+        
+        0.1 - Unreleased
+        ----------------
+        
+        * Initial release
+        
+        
+Keywords: application map django geo
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Topic :: Software Development :: Libraries :: Python Modules
