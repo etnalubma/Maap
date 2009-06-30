@@ -70,7 +70,7 @@ class Point(models.Model):
         out.pop('point')
         out['type'] = 'point'
         out['icon'] = self.icon.json_dict
-        out['geojson'] = simplejson.decoder.decode(self.point.geojson)
+        out['geojson'] = simplejson.loads(self.point.geojson)
         out['created'] = self.created.strftime('%D %T')        
         out['changed'] = self.changed.strftime('%D %T')	        
         

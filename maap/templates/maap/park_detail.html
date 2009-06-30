@@ -1,13 +1,11 @@
-{% extends 'maap/base.html' %}
-{% load markup tagging_tags %}
+    {% extends 'maap/base.html' %}
+{% load markup tagging_tags banner_tags%}
 
 {% block js_onload %}
 
-    baselayer = new Maap.Layer('base',{});
-    point = {{object.point.json_dict|escapejs}};
-    baselayer.addPoint(point);
-    state.map.addLayers(baselayer.getLayers());
-    state.layers['base'] = baselayer;
+    state.loadLayer({{object.id}}, false, function(layer){
+        layer.show();    
+    });
     
 {% endblock %}
 
@@ -16,14 +14,18 @@
 {% block content %}
     
     <h1>{{object.title}}</h1> 
-    <p class="discreet">    
+
+    <p class="discreet tags">    
     {% tags_for_object object as tags%}
     {% for tag in tags%}
-    {{tag}}
+    <a href="{% url maap.views.obj_list_by_tag tag %}">{{tag}}</a>
     {% endfor %}
     </p>
 
+    <div id="banner-slot-b">
+    {% pop_slot 'b-1' %}
+    </div>
     <p>{{object.description|markdown }}</p>
-
+    <br class="visualClear" />
 {% endblock %}
 

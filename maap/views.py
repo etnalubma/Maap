@@ -7,7 +7,7 @@ from models import Layer, Point, Icon
 
 from django.views.generic.list_detail import object_list, object_detail
 
-from tagging.models import Tag
+from tagging.models import TaggedItem, Tag
 
 def obj_list_by_tag(request, tag):
     tagins = Tag.objects.get(name=tag)
@@ -16,11 +16,12 @@ def obj_list_by_tag(request, tag):
 
 
 def park_detail(request, park_id):
-    parks = Tag.objects.get(name='park')
+    parks = TaggedItem.objects.get_by_model(Layer,'park')
+    
     return object_detail(request, parks, park_id, template_name='maap/park_detail.html')
     
 def park_list(request):
-    parks = Tag.objects.get(name='park')
+    parks = TaggedItem.objects.get_by_model(Layer,'park')
     return object_list(request, parks, template_name='maap/park_list.html')
     
 def convOSM(wkt):
@@ -41,17 +42,23 @@ def layer(request, layer_id):
     
     return HttpResponse(simplejson.dumps(layer.json_dict), mimetype='text/json')
 
+def point(request, point_id):
+    try:
+        point = Point.objects.get(pk=int(point_id))
+    except Point.DoesNotExist:
+        raise Http404
+    
+    return HttpResponse(simplejson.dumps(point.json_dict), mimetype='text/json')
+
 
 def index(request):
    
     mls = Layer.objects.all()
    
-    return render_to_response(
-        'index.html',
-        {
-            'layer_list': mls, 
-        }
-    )
+      
+    mls = Layer.objects.all()
+    context = RequestContext(request, {'layer_list':mls})
+    return render_to_response('index.html', context_instance=context )    
     
     
 def marker_layer(request, markerlayer_id):

@@ -10,11 +10,11 @@ media_root = os.path.join(os.path.dirname(__file__), 'media')
 urlpatterns = patterns('maap.views',
     (r'^$','index'),
     (r'^markerlayer/(?P<markerlayer_id>\d+)/$', 'marker_layer'),
-    (r'^layer/(?P<layer_id>\d+)/$', 'layer'),
+    (r'^json/layer/(?P<layer_id>\d+)/$', 'layer'),
+    (r'^json/point/(?P<point_id>\d+)/$', 'point'),
     (r'parques', 'park_list'),
     (r'^parque/(?P<park_id>\d+)/$', 'park_detail'),
     (r'^tags/(?P<tag>[^/]+)/$','obj_list_by_tag'),
-
 )
 
 urlpatterns += patterns('',

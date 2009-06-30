@@ -6,12 +6,12 @@
 {% block content %}
 
 	<h1 class="documentFirstHeading">Parques etiquetados con <em>{{tag}}</em></h1>
-    {% tagged_objects tag in maap.Parque as objs %}
+    {% tagged_objects tag in maap.Layer as objs %}
 	{% if objs %}
 		<ul id="obj-list">
 			{% for object in objs %}
 			<li>
-                <h3><a href="{% url maap.views.park_detail object.pk %}">{{object.title}}</a></h3>
+                <h3><a href="{% url maap.views.park_detail object.pk %}">{{object.name}}</a></h3>
                 <p class="discreet tags">    
                 {% tags_for_object object as tags%}
                 {% for tag in tags%}

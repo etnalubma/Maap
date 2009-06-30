@@ -106,7 +106,7 @@ Maap.State.prototype.loadPoint = function(pointid, callback) {
     state = this;
 
     //send request to server for get the layer to add 
-    $.getJSON('point/'+pointid+'/', 
+    $.getJSON('/maap/json/point/'+pointid+'/', 
         function(data) {
             // Eval layer object
             elements = data.elements                
