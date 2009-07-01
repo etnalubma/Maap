@@ -1,5 +1,5 @@
     {% extends 'maap/base.html' %}
-{% load markup tagging_tags banner_tags%}
+{% load markup tagging_tags banner_tags mptt_tags %}
 
 {% block js_onload %}
 
@@ -11,8 +11,17 @@
 
 
 {% block title %}{{object.title}}{% endblock %}
+
 {% block content %}
-    
+    {% with object.category.all|first as category %}
+    <p class="breadcrumb">
+    Usted está en : 
+    {% for cat in category.get_ancestors %}
+        <a href="{{cat.get_absolute_url}}">{{cat.name}}</a> -
+    {% endfor %}
+        <a href="{{category.get_absolute_url}}">{{category.name}}</a> 
+    </p>    
+    {% endwith %}
     <h1>{{object.title}}</h1> 
 
     <p class="discreet tags">    
