@@ -60,7 +60,7 @@ Maap.Layer.prototype = {
             this.base_layers[layer].setVisibility(false)
         }
     },
-    addPoint function(point) {
+    addPoint: function(point) {
         this.elements[this.elements.length] = point;
         if (self.elements.length == 1) {
             this.createMarkersLayer()
@@ -75,7 +75,7 @@ Maap.State.prototype.loadLayer = function(layerid, reload, callback) {
         state = this;
 
         //send request to server for get the layer to add 
-        $.getJSON('layer/'+layerid+'/', 
+        $.getJSON('/maap/json/layer/'+layerid+'/', 
             function(data) {
                 // Eval layer object
                 elements = data.elements                

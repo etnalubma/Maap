@@ -75,7 +75,7 @@ Maap.State.prototype.loadLayer = function(layerid, reload, callback) {
         state = this;
 
         //send request to server for get the layer to add 
-        $.getJSON('/maap/json/layer/'+layerid+'/', 
+        $.getJSON('/maap/json/object/'+layerid+'/', 
             function(data) {
                 // Eval layer object
                 elements = data.elements                

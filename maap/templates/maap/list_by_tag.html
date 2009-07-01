@@ -6,7 +6,7 @@
 {% block content %}
 
 	<h1 class="documentFirstHeading">Parques etiquetados con <em>{{tag}}</em></h1>
-    {% tagged_objects tag in maap.Layer as objs %}
+    {% tagged_objects tag in maap.MaapModel as objs %}
 	{% if objs %}
 		<ul id="obj-list">
 			{% for object in objs %}
