@@ -1,5 +1,5 @@
     {% extends 'maap/base.html' %}
-{% load markup tagging_tags banner_tags mptt_tags %}
+{% load markup tagging_tags banner_tags mptt_tags maap_tags %}
 
 {% block js_onload %}
 
@@ -10,9 +10,15 @@
 {% endblock %}
 
 
-{% block title %}{{object.title}}{% endblock %}
+{% block title %}{{object.name}}{% endblock %}
+{% block categories %}
+    {% with object.category.all|first as category %}
+       {% category_list category %}
+    {% endwith %}
+{% endblock %}
 
 {% block content %}
+
     {% with object.category.all|first as category %}
     <p class="breadcrumb">
     Usted está en : 
@@ -22,7 +28,7 @@
         <a href="{{category.get_absolute_url}}">{{category.name}}</a> 
     </p>    
     {% endwith %}
-    <h1>{{object.title}}</h1> 
+    <h1>{{object.name}}</h1> 
 
     <p class="discreet tags">    
     {% tags_for_object object as tags%}
@@ -34,7 +40,8 @@
     <div id="banner-slot-b">
     {% pop_slot 'b-1' %}
     </div>
-    <p>{{object.description|markdown }}</p>
+    <div id="description">{{object.description|markdown }}</div>
     <br class="visualClear" />
+
 {% endblock %}
 

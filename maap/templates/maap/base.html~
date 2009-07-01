@@ -15,15 +15,8 @@
         // Initialize state
         state = new Maap.State();
         state.init();        
-/*        state.loadPoint({{object.pk}}, function(point) {
-            baselayer = new Maap.Layer('base',{});
-            baselayer.addPoint(point);
-            state.map.addLayers(baselayer.getLayers());
-            state.layers[Layer.id] = Layer;        
-        });
-        
-
-*/
+        {% block js_onload %}
+        {% endblock %}
     } 
 
 )	

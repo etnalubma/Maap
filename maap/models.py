@@ -43,6 +43,8 @@ class MaapModel(models.Model):
         return out
 
 class MaapCategory(models.Model):
+    #id = models.CharField(max_length=35, primary_key=True)
+    slug = models.SlugField(unique=True)
     name = models.CharField(max_length=35)
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')    
     maapmodel = models.ManyToManyField(MaapModel, null=True, blank=True, related_name='category_set')
@@ -52,6 +54,9 @@ class MaapCategory(models.Model):
 
     def delete(self):
         super(LayerCategory, self).delete()
+
+    def get_absolute_url(self):
+        return '/maap/category/%s/'%self.slug
 
 class MaapPoint(MaapModel):
 

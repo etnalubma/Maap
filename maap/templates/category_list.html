@@ -8,7 +8,7 @@
     {% ifequal node current %}
     <strong>{{ node.name }}</strong>
     {% else %}
-    <a href="{{ node.get_absolute_url }}">{{ node.name }}</a>
+    <a {% if node.is_root_node %}class="root-node"{% endif %}href="{{ node.get_absolute_url }}">{{ node.name }}</a>
     {% endifequal %}
     {% for level in structure.closed_levels %}</li></ul>{% endfor %}
 {% endfor %}
@@ -20,7 +20,7 @@
 {% for root_node in roots %}
 <div class="not-current">
     {% with root_node.children.all as childrens %}
-    <a href="{{ root_node.get_absolute_url }}">{{ root_node.name }}</a><br />
+    <a class="root-node" href="{{ root_node.get_absolute_url }}">{{ root_node.name }}</a><br />
     <ul>{% if childrens %}
         {% for node in childrens %}
         <li>

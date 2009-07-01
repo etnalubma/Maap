@@ -1,8 +1,10 @@
 {% extends 'master.html' %}
-{% load markup tagging_tags %}
+{% load markup tagging_tags maap_tags %}
 {% block title %}Lista de parques{%endblock%}
 {% block map %} {% endblock %}
-
+{% block categories %}
+       {% category_list category %}
+{% endblock %}
 {% block content %}
 
   {% if objects %}
