@@ -78,7 +78,7 @@ class MaapPoint(MaapModel):
    
 class Icon(models.Model):
     name = models.CharField(max_length=100 )
-    image = models.ImageField(upload_to="image" )
+    image = models.ImageField(upload_to="icons" )
 
     def __unicode__( self ):
         return self.name
