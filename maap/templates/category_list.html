@@ -6,33 +6,37 @@
   {% for node,structure in drilldown|tree_info %}
     {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
     {% ifequal node current %}
-    <strong>{{ node.name }}</strong>
+    <strong {% if node.is_root_node %}class="root-node"{% endif %}>{{ node.name }}</strong>
     {% else %}
-    <a {% if node.is_root_node %}class="root-node"{% endif %}href="{{ node.get_absolute_url }}">{{ node.name }}</a>
+    <a {% if node.is_root_node %}class="root-node"{% endif %} href="{{ node.get_absolute_url }}">{{ node.name }}</a>
     {% endifequal %}
     {% for level in structure.closed_levels %}</li></ul>{% endfor %}
 {% endfor %}
+<br style="clear:right" />
 </div>
 {% endif %}
 
 
-
-{% for root_node in roots %}
 <div class="not-current">
-    {% with root_node.children.all as childrens %}
-    <a class="root-node" href="{{ root_node.get_absolute_url }}">{{ root_node.name }}</a><br />
-    <ul>{% if childrens %}
-        {% for node in childrens %}
-        <li>
-        <a href="{{ node.get_absolute_url }}">{{ node.name }}</a>
-        </li>
-        {% endfor %}
-        {% endif %}
-    </ul>
 
-    {% endwith %}
+    {% for root_node in roots %}
+    <div>
+        {% with root_node.children.all as childrens %}
+        <a class="root-node" href="{{ root_node.get_absolute_url }}">{{ root_node.name }}</a><br />
+        <ul>{% if childrens %}
+            {% for node in childrens %}
+            <li>
+            <a href="{{ node.get_absolute_url }}">{{ node.name }}</a>
+            </li>
+            {% endfor %}
+            {% endif %}
+        </ul>
+
+        {% endwith %}
+    </div>
+    {% endfor %}
+
+    <br style="clear:right" />
 </div>
-{% endfor %}
-
 
 
