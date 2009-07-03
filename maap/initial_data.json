@@ -1,0 +1,1083 @@
+[
+  {
+    "pk": 1, 
+    "model": "maap.maapmodel", 
+    "fields": {
+      "category": [
+        6
+      ], 
+      "changed": "2009-07-02 23:53:08", 
+      "name": "Estacion Belgrano", 
+      "creator": "", 
+      "created": "2009-07-02 23:53:08", 
+      "editor": "", 
+      "tags": "", 
+      "description": "Estacion de ferrocarril Belgrano"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 2, 
+      "name": "Hospitales", 
+      "parent": null, 
+      "level": 0, 
+      "maapmodel": [], 
+      "lft": 1, 
+      "tree_id": 2, 
+      "slug": "hospitales"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 3, 
+      "name": "Polic\u00eda", 
+      "parent": 1, 
+      "level": 1, 
+      "maapmodel": [], 
+      "lft": 2, 
+      "tree_id": 1, 
+      "slug": "policia"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 9, 
+      "name": "Transporte", 
+      "parent": 1, 
+      "level": 1, 
+      "maapmodel": [], 
+      "lft": 4, 
+      "tree_id": 1, 
+      "slug": "transporte"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 6, 
+      "name": "Terminales de Colectivos", 
+      "parent": 4, 
+      "level": 2, 
+      "maapmodel": [], 
+      "lft": 5, 
+      "tree_id": 1, 
+      "slug": "terminales"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 10, 
+      "name": "Servicios P\u00fablicos", 
+      "parent": null, 
+      "level": 0, 
+      "maapmodel": [], 
+      "lft": 1, 
+      "tree_id": 1, 
+      "slug": "serviciospublicos"
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 8, 
+      "name": "Estaciones de Ferrocarriles", 
+      "parent": 4, 
+      "level": 2, 
+      "maapmodel": [], 
+      "lft": 7, 
+      "tree_id": 1, 
+      "slug": "ferrocarriles"
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 3, 
+      "name": "Plazas y Parques", 
+      "parent": 7, 
+      "level": 1, 
+      "maapmodel": [], 
+      "lft": 2, 
+      "tree_id": 3, 
+      "slug": "plazasyparques"
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 5, 
+      "name": "Bustos y Monumentos", 
+      "parent": 7, 
+      "level": 1, 
+      "maapmodel": [], 
+      "lft": 4, 
+      "tree_id": 3, 
+      "slug": "bustos"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 8, 
+      "name": "Espacios Verdes", 
+      "parent": null, 
+      "level": 0, 
+      "maapmodel": [], 
+      "lft": 1, 
+      "tree_id": 3, 
+      "slug": "espaciosverdes"
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 7, 
+      "name": "Paseos", 
+      "parent": 7, 
+      "level": 1, 
+      "maapmodel": [], 
+      "lft": 6, 
+      "tree_id": 3, 
+      "slug": "paseos"
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 5, 
+      "name": "Linea A Azul", 
+      "parent": 11, 
+      "level": 1, 
+      "maapmodel": [], 
+      "lft": 2, 
+      "tree_id": 4, 
+      "slug": "aazul"
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 4, 
+      "name": "A1 ", 
+      "parent": 12, 
+      "level": 2, 
+      "maapmodel": [], 
+      "lft": 3, 
+      "tree_id": 4, 
+      "slug": "a1"
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 9, 
+      "name": "Linea C Amarillo", 
+      "parent": 11, 
+      "level": 1, 
+      "maapmodel": [], 
+      "lft": 6, 
+      "tree_id": 4, 
+      "slug": "camarillo"
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 14, 
+      "name": "Recorridos de Colectivos", 
+      "parent": null, 
+      "level": 0, 
+      "maapmodel": [], 
+      "lft": 1, 
+      "tree_id": 4, 
+      "slug": "colectivos"
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 13, 
+      "name": "Linea E Celeste", 
+      "parent": 11, 
+      "level": 1, 
+      "maapmodel": [], 
+      "lft": 10, 
+      "tree_id": 4, 
+      "slug": "eceleste"
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 12, 
+      "name": "E2", 
+      "parent": 15, 
+      "level": 2, 
+      "maapmodel": [], 
+      "lft": 11, 
+      "tree_id": 4, 
+      "slug": "e2"
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 8, 
+      "name": "C2", 
+      "parent": 14, 
+      "level": 2, 
+      "maapmodel": [], 
+      "lft": 7, 
+      "tree_id": 4, 
+      "slug": "c2"
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 3, 
+      "name": "Pizzer\u00edas", 
+      "parent": 18, 
+      "level": 1, 
+      "maapmodel": [], 
+      "lft": 2, 
+      "tree_id": 5, 
+      "slug": "pizzerias"
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 5, 
+      "name": "Restaurants", 
+      "parent": 18, 
+      "level": 1, 
+      "maapmodel": [], 
+      "lft": 4, 
+      "tree_id": 5, 
+      "slug": "restoranes"
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 8, 
+      "name": "Gastronom\u00eda", 
+      "parent": null, 
+      "level": 0, 
+      "maapmodel": [], 
+      "lft": 1, 
+      "tree_id": 5, 
+      "slug": "gastronomia"
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "maap.maapcategory", 
+    "fields": {
+      "rght": 7, 
+      "name": "Puestos de Choripanes", 
+      "parent": 18, 
+      "level": 1, 
+      "maapmodel": [], 
+      "lft": 6, 
+      "tree_id": 5, 
+      "slug": "choris"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "maap.maappoint", 
+    "fields": {
+      "category": [
+        6
+      ], 
+      "icon": 125, 
+      "point": "POINT (-7144014.8640786996111274 -3687580.2187864999286830)"
+    }
+  }, 
+  {
+    "pk": 96, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/pool.png", 
+      "name": "pool"
+    }
+  }, 
+  {
+    "pk": 97, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/soccer.png", 
+      "name": "soccer"
+    }
+  }, 
+  {
+    "pk": 98, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/pizza.png", 
+      "name": "pizza"
+    }
+  }, 
+  {
+    "pk": 99, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/tennis.png", 
+      "name": "tennis"
+    }
+  }, 
+  {
+    "pk": 100, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/beautiful.png", 
+      "name": "beautiful"
+    }
+  }, 
+  {
+    "pk": 101, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/accident.png", 
+      "name": "accident"
+    }
+  }, 
+  {
+    "pk": 102, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/coffee.png", 
+      "name": "coffee"
+    }
+  }, 
+  {
+    "pk": 103, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/zoo.png", 
+      "name": "zoo"
+    }
+  }, 
+  {
+    "pk": 104, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/camping.png", 
+      "name": "camping"
+    }
+  }, 
+  {
+    "pk": 105, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/animals.png", 
+      "name": "animals"
+    }
+  }, 
+  {
+    "pk": 106, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/dates.png", 
+      "name": "dates"
+    }
+  }, 
+  {
+    "pk": 107, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/factory.png", 
+      "name": "factory"
+    }
+  }, 
+  {
+    "pk": 108, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/flowers.png", 
+      "name": "flowers"
+    }
+  }, 
+  {
+    "pk": 109, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/church.png", 
+      "name": "church"
+    }
+  }, 
+  {
+    "pk": 110, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/apartment.png", 
+      "name": "apartment"
+    }
+  }, 
+  {
+    "pk": 111, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/bread.png", 
+      "name": "bread"
+    }
+  }, 
+  {
+    "pk": 112, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/skiing.png", 
+      "name": "skiing"
+    }
+  }, 
+  {
+    "pk": 113, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/poker.png", 
+      "name": "poker"
+    }
+  }, 
+  {
+    "pk": 114, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/music.png", 
+      "name": "music"
+    }
+  }, 
+  {
+    "pk": 115, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/monday.png", 
+      "name": "monday"
+    }
+  }, 
+  {
+    "pk": 116, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/drugs.png", 
+      "name": "drugs"
+    }
+  }, 
+  {
+    "pk": 117, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/club.png", 
+      "name": "club"
+    }
+  }, 
+  {
+    "pk": 118, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/library.png", 
+      "name": "library"
+    }
+  }, 
+  {
+    "pk": 119, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/bank.png", 
+      "name": "bank"
+    }
+  }, 
+  {
+    "pk": 120, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/museum.png", 
+      "name": "museum"
+    }
+  }, 
+  {
+    "pk": 121, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/playground.png", 
+      "name": "playground"
+    }
+  }, 
+  {
+    "pk": 122, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/parking.png", 
+      "name": "parking"
+    }
+  }, 
+  {
+    "pk": 123, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/cloudsun.png", 
+      "name": "cloudsun"
+    }
+  }, 
+  {
+    "pk": 124, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/hotel.png", 
+      "name": "hotel"
+    }
+  }, 
+  {
+    "pk": 125, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/train.png", 
+      "name": "train"
+    }
+  }, 
+  {
+    "pk": 126, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/doctor.png", 
+      "name": "doctor"
+    }
+  }, 
+  {
+    "pk": 127, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/firemen.png", 
+      "name": "firemen"
+    }
+  }, 
+  {
+    "pk": 128, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/realestate.png", 
+      "name": "realestate"
+    }
+  }, 
+  {
+    "pk": 129, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/cycling.png", 
+      "name": "cycling"
+    }
+  }, 
+  {
+    "pk": 130, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/administration.png", 
+      "name": "administration"
+    }
+  }, 
+  {
+    "pk": 131, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/restaurantchinese.png", 
+      "name": "restaurantchinese"
+    }
+  }, 
+  {
+    "pk": 132, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/horseriding.png", 
+      "name": "horseriding"
+    }
+  }, 
+  {
+    "pk": 133, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/restaurantjapanese.png", 
+      "name": "restaurantjapanese"
+    }
+  }, 
+  {
+    "pk": 134, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/findjob.png", 
+      "name": "findjob"
+    }
+  }, 
+  {
+    "pk": 135, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/satursday.png", 
+      "name": "satursday"
+    }
+  }, 
+  {
+    "pk": 136, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/military.png", 
+      "name": "military"
+    }
+  }, 
+  {
+    "pk": 137, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/hospital.png", 
+      "name": "hospital"
+    }
+  }, 
+  {
+    "pk": 138, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/university.png", 
+      "name": "university"
+    }
+  }, 
+  {
+    "pk": 139, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/videogames.png", 
+      "name": "videogames"
+    }
+  }, 
+  {
+    "pk": 140, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/golf.png", 
+      "name": "golf"
+    }
+  }, 
+  {
+    "pk": 141, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/bar.png", 
+      "name": "bar"
+    }
+  }, 
+  {
+    "pk": 142, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/park.png", 
+      "name": "park"
+    }
+  }, 
+  {
+    "pk": 143, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/port.png", 
+      "name": "port"
+    }
+  }, 
+  {
+    "pk": 144, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/school.png", 
+      "name": "school"
+    }
+  }, 
+  {
+    "pk": 145, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/taxi.png", 
+      "name": "taxi"
+    }
+  }, 
+  {
+    "pk": 146, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/cinema.png", 
+      "name": "cinema"
+    }
+  }, 
+  {
+    "pk": 147, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/supermarket.png", 
+      "name": "supermarket"
+    }
+  }, 
+  {
+    "pk": 148, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/info.png", 
+      "name": "info"
+    }
+  }, 
+  {
+    "pk": 149, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/toys.png", 
+      "name": "toys"
+    }
+  }, 
+  {
+    "pk": 150, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/schrink.png", 
+      "name": "schrink"
+    }
+  }, 
+  {
+    "pk": 151, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/highway.png", 
+      "name": "highway"
+    }
+  }, 
+  {
+    "pk": 152, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/girlfriend.png", 
+      "name": "girlfriend"
+    }
+  }, 
+  {
+    "pk": 153, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/theater.png", 
+      "name": "theater"
+    }
+  }, 
+  {
+    "pk": 154, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/fastfood.png", 
+      "name": "fastfood"
+    }
+  }, 
+  {
+    "pk": 155, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/airport.png", 
+      "name": "airport"
+    }
+  }, 
+  {
+    "pk": 156, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/car.png", 
+      "name": "car"
+    }
+  }, 
+  {
+    "pk": 157, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/bowling.png", 
+      "name": "bowling"
+    }
+  }, 
+  {
+    "pk": 158, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/sunday.png", 
+      "name": "sunday"
+    }
+  }, 
+  {
+    "pk": 159, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/company.png", 
+      "name": "company"
+    }
+  }, 
+  {
+    "pk": 160, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/stoplight.png", 
+      "name": "stoplight"
+    }
+  }, 
+  {
+    "pk": 161, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/thunder.png", 
+      "name": "thunder"
+    }
+  }, 
+  {
+    "pk": 162, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/restaurant.png", 
+      "name": "restaurant"
+    }
+  }, 
+  {
+    "pk": 163, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/toilets.png", 
+      "name": "toilets"
+    }
+  }, 
+  {
+    "pk": 164, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/carrepair.png", 
+      "name": "carrepair"
+    }
+  }, 
+  {
+    "pk": 165, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/tuesday.png", 
+      "name": "tuesday"
+    }
+  }, 
+  {
+    "pk": 166, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/disability.png", 
+      "name": "disability"
+    }
+  }, 
+  {
+    "pk": 167, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/fishing.png", 
+      "name": "fishing"
+    }
+  }, 
+  {
+    "pk": 168, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/sun.png", 
+      "name": "sun"
+    }
+  }, 
+  {
+    "pk": 169, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/thursday.png", 
+      "name": "thursday"
+    }
+  }, 
+  {
+    "pk": 170, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/recycle.png", 
+      "name": "recycle"
+    }
+  }, 
+  {
+    "pk": 171, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/beach.png", 
+      "name": "beach"
+    }
+  }, 
+  {
+    "pk": 172, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/hiking.png", 
+      "name": "hiking"
+    }
+  }, 
+  {
+    "pk": 173, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/casino.png", 
+      "name": "casino"
+    }
+  }, 
+  {
+    "pk": 174, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/farm.png", 
+      "name": "farm"
+    }
+  }, 
+  {
+    "pk": 175, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/rain.png", 
+      "name": "rain"
+    }
+  }, 
+  {
+    "pk": 176, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/police.png", 
+      "name": "police"
+    }
+  }, 
+  {
+    "pk": 177, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/computer.png", 
+      "name": "computer"
+    }
+  }, 
+  {
+    "pk": 178, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/friends.png", 
+      "name": "friends"
+    }
+  }, 
+  {
+    "pk": 179, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/wednesday.png", 
+      "name": "wednesday"
+    }
+  }, 
+  {
+    "pk": 180, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/bus.png", 
+      "name": "bus"
+    }
+  }, 
+  {
+    "pk": 181, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/friday.png", 
+      "name": "friday"
+    }
+  }, 
+  {
+    "pk": 182, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/gazstation.png", 
+      "name": "gazstation"
+    }
+  }, 
+  {
+    "pk": 183, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/clothes.png", 
+      "name": "clothes"
+    }
+  }, 
+  {
+    "pk": 184, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/justice.png", 
+      "name": "justice"
+    }
+  }, 
+  {
+    "pk": 185, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/home.png", 
+      "name": "home"
+    }
+  }, 
+  {
+    "pk": 186, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/postal.png", 
+      "name": "postal"
+    }
+  }, 
+  {
+    "pk": 187, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/clouds.png", 
+      "name": "clouds"
+    }
+  }, 
+  {
+    "pk": 188, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/shoes.png", 
+      "name": "shoes"
+    }
+  }, 
+  {
+    "pk": 189, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/wifi.png", 
+      "name": "wifi"
+    }
+  }, 
+  {
+    "pk": 190, 
+    "model": "maap.icon", 
+    "fields": {
+      "image": "icons/truck.png", 
+      "name": "truck"
+    }
+  }
+]
