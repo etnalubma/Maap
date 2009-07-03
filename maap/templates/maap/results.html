@@ -1,0 +1,36 @@
+{% extends 'maap/base.html' %}
+{% load markup tagging_tags %}
+{% block title %}Resultados de busqueda{%endblock%}
+{% block js_onload %}
+
+    state.loadLayer('{{layerpath}}', false, function(layer){
+        layer.show();    
+    });
+    
+{% endblock %}
+
+{% block content %}
+
+	{% if objs %}
+		<ul id="obj-list">
+			{% for object in objs %}
+			<li>
+            {% with object.category.all|first as category %}
+            <h3><a href="{% url maap.views.maap_object_detail category.slug,object.pk %}">{{object.name}}</a></h3>
+            {% endwith %}  
+            <p class="discreet tags">                
+            {% tags_for_object object as tags%}
+            {% for tag in tags%}
+                <a href="{% url maap.views.obj_list_by_tag tag %}">{{tag}}</a> 
+            {% endfor %}
+            </p>
+            </li>
+            {% endfor %}
+		</ul>
+    {% else %}
+    <h1>No hay resultados</h1>
+    {% endif %}
+    
+
+{% endblock %}
+
