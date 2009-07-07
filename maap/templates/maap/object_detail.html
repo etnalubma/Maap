@@ -3,7 +3,7 @@
 
 {% block js_onload %}
 
-    state.loadLayer({{object.id}}, false, function(layer){
+    state.loadLayer('/maap/api/get?id={{object.pk}}&out=layer', false, function(layer){
         layer.show();    
     });
     

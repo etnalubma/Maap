@@ -70,25 +70,20 @@ Maap.Layer.prototype = {
 
 
 // Extends Maap.State functionality: Add Layer
-Maap.State.prototype.loadLayer = function(layerid, reload, callback) {
-    if (reload || !(layerid in this.layers)) {
-        state = this;
+Maap.State.prototype.loadLayer = function(url, reload, callback) {
+    state = this;
 
-        //send request to server for get the layer to add 
-        $.getJSON('/maap/json/object/'+layerid+'/', 
-            function(data) {
-                // Eval layer object
-                elements = data.elements                
-                Layer = new Maap.Layer(data.id, data);          
-                state.map.addLayers(Layer.getLayers());
-                state.layers[Layer.id] = Layer;
-                callback(Layer);
-            }
-        );
-    } else if (layerid in this.layers) {
-        callback(this.layers[layerid]);
-    }
-    
+    //send request to server for get the layer to add 
+    $.getJSON(url, 
+        function(data) {
+            // Eval layer object
+            elements = data.elements                
+            Layer = new Maap.Layer(data.id, data);          
+            state.map.addLayers(Layer.getLayers());
+            state.layers[Layer.id] = Layer;
+            callback(Layer);
+        }
+    );
     return 0;
 };
 
