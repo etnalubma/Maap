@@ -1,27 +1,27 @@
 {% load mptt_tags %}
+<table border="0" cellspacing="0" cellpadding="0">
 
-{% if current_root %}
-<div class="current">
-{% drilldown_tree_for_node current as drilldown %}
-  {% for node,structure in drilldown|tree_info %}
-    {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
-    {% ifequal node current %}
-    <strong {% if node.is_root_node %}class="root-node"{% endif %}>{{ node.name }}</strong>
-    {% else %}
-    <a {% if node.is_root_node %}class="root-node"{% endif %} href="{{ node.get_absolute_url }}">{{ node.name }}</a>
-    {% endifequal %}
-    {% for level in structure.closed_levels %}</li></ul>{% endfor %}
-{% endfor %}
-<br style="clear:right" />
-</div>
-{% endif %}
-
-
-<div class="not-current">
+    <tr>
+    {% if current_root %}
+    <td class="current">
+    {% drilldown_tree_for_node current as drilldown %}
+      {% for node,structure in drilldown|tree_info %}
+        {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
+        {% ifequal node current %}
+        <strong {% if node.is_root_node %}class="root-node"{% endif %}>{{ node.name }}</strong>
+        {% else %}
+        <a {% if node.is_root_node %}class="root-node"{% endif %} href="{{ node.get_absolute_url }}">{{ node.name }}</a>
+        {% endifequal %}
+        {% for level in structure.closed_levels %}</li></ul>{% endfor %}
+    {% endfor %}
+    </td>
+    {% endif %}
 
     {% for root_node in roots %}
-    <div>
+
+
         {% with root_node.children.all as childrens %}
+        <td>
         <a class="root-node" href="{{ root_node.get_absolute_url }}">{{ root_node.name }}</a><br />
         <ul>{% if childrens %}
             {% for node in childrens %}
@@ -31,12 +31,23 @@
             {% endfor %}
             {% endif %}
         </ul>
+        </td>
+    {% endwith %}
+    {% if current_root %}
+        {% if forloop.counter|divisibleby:"4" %}
+        </tr><tr>
+        
+        {%endif%}
+    {% else %}
+        {% if forloop.counter|divisibleby:"5" %}
+        </tr><tr>
+        
+        {%endif%}
 
-        {% endwith %}
-    </div>
+    {%endif%}
+    
     {% endfor %}
-
-    <br style="clear:right" />
-</div>
+        </tr>
+</table>
 
 

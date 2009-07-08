@@ -27,3 +27,5 @@ maap/media/modules/state.js
 maap/media/modules/sys.js
 maap/media/modules/utils.js
 maap/templates/index.html
+maap/templatetags/__init__.py
+maap/templatetags/maap_tags.py
