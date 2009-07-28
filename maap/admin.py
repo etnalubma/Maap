@@ -1,6 +1,6 @@
 from django.contrib.gis import admin
 from models import *
-admin.site.register(Icon, admin.OSMGeoAdmin)
-admin.site.register(MaapPoint, admin.OSMGeoAdmin)
-admin.site.register(MaapCategory, admin.OSMGeoAdmin)
+admin.site.register(Icon, admin.GeoModelAdmin)
+admin.site.register(MaapPoint, admin.GeoModelAdmin)
+admin.site.register(MaapCategory, admin.GeoModelAdmin)
 
