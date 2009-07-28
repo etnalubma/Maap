@@ -13,6 +13,7 @@ urlpatterns = patterns('maap.views',
 #    (r'^json/object/(?P<object_id>\d+)/$', 'json_object'),
     (r'^category/(?P<cat_slug>[^/]+)/$', 'obj_list_by_cat'),
     (r'^streets/$', 'search_streets'),
+    (r'^get_streets_json/$', 'get_streets_json'),
     (r'(?P<cat_slug>[^/]+)/(?P<object_id>\d+)/$','maap_object_detail'),
     (r'^tags/(?P<tag>[^/]+)/$','obj_list_by_tag'),
 )

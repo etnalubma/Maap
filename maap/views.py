@@ -13,15 +13,22 @@ from tagging.models import TaggedItem, Tag
 from osm.utils import get_locations_by_intersection, get_location_by_door
 
 def search_streets(request):
-    if request.method == 'GET':
-        pass
-    else :
-        pass
-
-    context = RequestContext(request,{'results':''})
-
+    results = []
+    if request.method == 'POST':
+        streetname = request.POST['streetname']
+        intersection = request.POST['intersection']
+        streetnumber = request.POST['streetnumber']
+        
+        if streetname and intersection :
+            results=get_locations_by_intersection(streetname,intersection)
+        elif streetname and streetnumber:
+            results.append(get_location_by_door(streetname,streetnumber)[0])
+        
+    context = RequestContext(request,{'results':results,'POST':request.POST})
     
     return render_to_response('maap/streets.html', context_instance=context)
+
+
 
 
 def get_streets_json(request):
