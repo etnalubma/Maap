@@ -3,9 +3,133 @@ from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 from django.utils import simplejson
 from django.http import HttpResponse, Http404
 from django.template import RequestContext
-from models import MaapModel, MaapPoint, Icon, MaapCategory
+from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic.list_detail import object_list, object_detail
+from osm.models import *
+from models import MaapModel, MaapPoint, Icon, MaapCategory
+
 from tagging.models import TaggedItem, Tag
+
+from osm.utils import get_locations_by_intersection, get_location_by_door
+
+def search_streets(request):
+    if request.method == 'GET':
+        pass
+    else :
+        pass
+
+    context = RequestContext(request,{'results':''})
+
+    
+    return render_to_response('maap/streets.html', context_instance=context)
+
+
+def get_streets_json(request):
+    #return point_intersection(request, 'Independencia', 200)
+    results = get_locations_by_intersection('9 de Julio','Rivera Indarte')    
+    
+    points = []
+    for r in results:
+
+        pgeom = OGRGeometry(r.wkt)
+        pgeom.srs = 'EPSG:4326'
+        pgeom.transform_to(SpatialReference('EPSG:900913'))
+        pcoord = simplejson.loads(pgeom.json)
+        points.append({
+          "type": "point",
+          "id": '23', 
+          "name": "pipin",
+          "geojson": pcoord, 
+          "icon": {
+            "url": "/media/icons/soccer.png", 
+            "width": 32, 
+            "height": 37
+            }
+        })
+  
+    layer = {
+        'type': 'layer',
+        'id': 'layer-object-%s' % 'layer',
+        'elements': points,
+        'box_size': None
+    }
+    return HttpResponse(simplejson.dumps(layer), mimetype='text/json')    
+    
+
+
+
+def point_intersection(request, string, door):
+    res = get_location_by_door(string, door)
+    if not res:
+        raise Http404
+
+    # cast geometry data and change projection from way polygon
+    resgeom = OGRGeometry(res[0].wkt)
+    resgeom.srs = 'EPSG:4326'
+    resgeom.transform_to(SpatialReference('EPSG:900913'))
+
+    # Get ways data
+    qset = WayNodes.objects.select_related('way_searchableway', 'node').filter(way__searchableway__name__startswith = string)    
+    # Set points grouped by way
+    waysdict = {}
+    for wn in qset:
+        try:
+            # This is making queries, need to be checked
+            door = wn.waynodesdoor.number
+        except WayNodesDoor.DoesNotExist:
+            door = None
+        point = {
+            'way_id': wn.way_id,
+            'geom': wn.node.geom,
+            'door':door,
+            'id': wn.node.id,
+        }
+        if wn.way_id in waysdict.keys():
+            waysdict[wn.way_id].append(point)
+        else:
+            waysdict[wn.way_id] = [point]
+    
+    # get all nodes from ways result and append as a maap.point json
+    nodes = reduce(lambda x,y: x+y, waysdict.values(), [])    
+    nodes = filter(lambda n: n['door'] is not None, nodes)
+    points = []
+    for p in nodes: 
+        pgeom = OGRGeometry(p['geom'].wkt)
+        pgeom.srs = 'EPSG:4326'
+        pgeom.transform_to(SpatialReference('EPSG:900913'))
+        pcoord = simplejson.loads(pgeom.json)
+        points.append({
+          "type": "point",
+          "id": p['id'], 
+          "name": "pipin",
+          "geojson": pcoord, 
+          "icon": {
+            "url": "/media/icons/soccer.png", 
+            "width": 32, 
+            "height": 37
+            }
+        })
+    
+    points.append({
+      "type": "point",
+      "id": 'result', 
+      "name": "result",
+      "geojson": simplejson.loads(resgeom.json), 
+      "icon": {
+        "url": "/media/icons/info.png", 
+        "width": 32, 
+        "height": 37
+        }
+    })
+    
+    layer = {
+        'type': 'layer',
+        'id': 'layer-object-%s' % 'layer',
+        'elements': points,
+        'box_size': None
+    }
+    return HttpResponse(simplejson.dumps(layer), mimetype='text/json')
+
 
 def get_objects(request):
 
