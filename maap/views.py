@@ -1,4 +1,5 @@
 from django.shortcuts import render_to_response
+from django.db import connection
 from django.contrib.gis.gdal import OGRGeometry, SpatialReference
 from django.utils import simplejson
 from django.http import HttpResponse, Http404
@@ -11,6 +12,31 @@ from models import MaapModel, MaapPoint, Icon, MaapCategory
 from tagging.models import TaggedItem, Tag
 
 from osm.utils import get_locations_by_intersection, get_location_by_door
+
+def get_streets_list(street):
+    """ Esta funcion auxiliar sirve para desambiguar una busqueda de calles y matar gatitos. """
+
+    cursor = connection.cursor()
+
+    cursor.execute("""SELECT DISTINCT osm_searchableway.name FROM osm_searchableway WHERE osm_searchableway.name ILIKE %s""",['%%%s%%' % street])
+    return cursor.fetchall()    
+
+
+
+def street_lookup(request):
+    # Default return list
+    results = []
+    if request.method == "GET":
+        if u'query' in request.GET:
+            value = request.GET[u'query']
+            # puto el que lee
+            if len(value) > 2:
+                model_results = get_streets_list(value)
+                
+                
+                results = [ x[0] for x in model_results ]
+    json = simplejson.dumps(results)
+    return HttpResponse(json, mimetype='application/json')
 
 def search_streets(request):
     results = []

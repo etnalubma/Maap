@@ -1,0 +1,118 @@
+{% extends 'maap/base.html' %}
+{% block title %}
+Bienvenido
+{% endblock %}
+{% block css%}
+{% endblock %}
+
+{% block js_onload %}
+        setAutoComplete('streetname','results','{% url maap.views.street_lookup%}?query=')        
+        
+        //Form helpers
+        clearValue = function (element){
+            oldvalue = $(element).val()
+            console.log($(element).val())
+            $(element).attr('class','searchterm-dirty')
+            $(element).val('')
+            $(element).blur(function(){
+                if ($(element).val()==''){
+                    $(element).val(oldvalue)
+                    $(element).attr('class','searchterm')
+                }
+            })
+        }
+        $('#streetsform').submit(function(){
+            $(this).find(':fields').each(function(){
+                value = $(this).val()
+                if(value=="Ingrese un nombre de calle"||value=="Interseccion"||value=="Altura"){
+                    $(this).val('')
+                }
+            })
+        })
+
+        $('.searchterm').focus(function(){
+            value = $(this).val()
+            if(value=="Ingrese un nombre de calle"||value=="Interseccion"||value=="Altura"){
+                clearValue(this)
+            }
+        }) 
+
+
+        
+        // Show layer event handler
+        $('.show-layer').click(function () {
+            button = $(this)
+            parent = button.parent()
+            id = parent.attr('id');
+            state.loadLayer(id, false, function(layer){
+                layer.show();
+
+                // toogle view
+                parent.children('.hide-layer').css('display','inline');
+                button.css('display','none');
+            
+            });
+            
+            return false;
+        })
+        showresults = function(json){
+
+        }
+
+
+        // Hide layer event handler
+        $('.hide-layer').click(function () {
+            parent = $(this).parent()
+            id = parent.attr('id');
+            
+            state.layers[id].hide();   
+
+            // toogle view
+            parent.children('.show-layer').css('display','inline');
+            $(this).css('display','none');
+            
+            return false;
+        })
+{% endblock %}
+
+</head>
+<body>
+{% block searchform %}
+    <form action="{% url maap.views.search_streets %}" method="post" id="streetsform">
+    <input type="text" size="28" id="streetname"
+           value="{{POST.streetname|default:'Ingrese un nombre de calle'}}" 
+           class="searchterm" name="streetname">
+    <input type="text" 
+           value="{{POST.intersection|default:'Interseccion'}}" 
+           class="searchterm" size="18" name="intersection">
+    <input type="text" 
+           value="{{POST.streetnumber|default:'Altura'}}" 
+           class="searchterm" size="8" name="streetnumber">
+    <input type="submit" value="Buscar" id="searchbuton" name="search">
+    </form>
+{% endblock %}
+{% block content %}
+{% if results %}
+<h3> Resultados </h3>
+<ul>
+    {% for result in results %}
+    
+    <li id="{{result.id}}">
+
+    {{result}}
+    </li>
+
+
+    {% endfor %}
+</ul>
+{% else %}
+<h3>No hay resultados</h3>
+{% endif %}
+
+{% endblock %}
+
+
+</body>
+</body>
+
+
