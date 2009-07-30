@@ -1,12 +1,12 @@
 {% extends 'maap/base.html' %}
 {% block title %}
-Bienvenido
+Busqueda de calles
 {% endblock %}
 {% block css%}
 {% endblock %}
-
+{% block map %}{% endblock %}
 {% block js_onload %}
-        setAutoComplete('streetname','results','{% url maap.views.street_lookup%}?query=')        
+
         
         //Form helpers
         clearValue = function (element){
@@ -92,22 +92,23 @@ Bienvenido
     </form>
 {% endblock %}
 {% block content %}
-{% if results %}
+{% if intlist or strlist %}
 <h3> Resultados </h3>
 <ul>
-    {% for result in results %}
-    
-    <li id="{{result.id}}">
-
-    {{result}}
+    {% for il in intlist %}    
+    <li >
+    <a href="{% url maap.views.street_location %}?str={{il.0}}&int={{il.1}}">{{il.0}} Int. {{il.1}}</a>
     </li>
-
-
+    {% endfor %}
+    {% for il in strlist %}    
+    <li >
+    <a href="{% url maap.views.street_location %}?str={{il.0}}&door={{POST.streetnumber}}">{{il.0}} {{POST.streetnumber}}</a>
+    </li>
     {% endfor %}
 </ul>
-{% else %}
+{% else%}{%if request.POST %}
 <h3>No hay resultados</h3>
-{% endif %}
+{% endif %}{% endif %}
 
 {% endblock %}
 
