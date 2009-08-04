@@ -7,35 +7,7 @@ Busqueda de calles
 {% block map %}{% endblock %}
 {% block js_onload %}
 
-        
-        //Form helpers
-        clearValue = function (element){
-            oldvalue = $(element).val()
-            console.log($(element).val())
-            $(element).attr('class','searchterm-dirty')
-            $(element).val('')
-            $(element).blur(function(){
-                if ($(element).val()==''){
-                    $(element).val(oldvalue)
-                    $(element).attr('class','searchterm')
-                }
-            })
-        }
-        $('#streetsform').submit(function(){
-            $(this).find(':fields').each(function(){
-                value = $(this).val()
-                if(value=="Ingrese un nombre de calle"||value=="Interseccion"||value=="Altura"){
-                    $(this).val('')
-                }
-            })
-        })
 
-        $('.searchterm').focus(function(){
-            value = $(this).val()
-            if(value=="Ingrese un nombre de calle"||value=="Interseccion"||value=="Altura"){
-                clearValue(this)
-            }
-        }) 
 
 
         
@@ -77,20 +49,6 @@ Busqueda de calles
 
 </head>
 <body>
-{% block searchform %}
-    <form action="{% url maap.views.search_streets %}" method="post" id="streetsform">
-    <input type="text" size="28" id="streetname"
-           value="{{POST.streetname|default:'Ingrese un nombre de calle'}}" 
-           class="searchterm" name="streetname">
-    <input type="text" 
-           value="{{POST.intersection|default:'Interseccion'}}" 
-           class="searchterm" size="18" name="intersection">
-    <input type="text" 
-           value="{{POST.streetnumber|default:'Altura'}}" 
-           class="searchterm" size="8" name="streetnumber">
-    <input type="submit" value="Buscar" id="searchbuton" name="search">
-    </form>
-{% endblock %}
 {% block content %}
 {% if intlist or strlist %}
 <h3> Resultados </h3>

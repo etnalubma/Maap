@@ -206,10 +206,8 @@ def json_layer(qset):
 def index(request):
    
     mls = MaapModel.objects.all()
-   
-      
     mls = MaapModel.objects.all()
     context = RequestContext(request, {'layer_list':mls})
-    return render_to_response('index.html', context_instance=context )    
+    return render_to_response('maap/index.html', context_instance=context )    
     
 
