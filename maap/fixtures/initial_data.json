@@ -1,21 +1,5 @@
 [
   {
-    "pk": 1, 
-    "model": "maap.maapmodel", 
-    "fields": {
-      "category": [
-        6
-      ], 
-      "changed": "2009-07-02 23:53:08", 
-      "name": "Estacion Belgrano", 
-      "creator": "", 
-      "created": "2009-07-02 23:53:08", 
-      "editor": "", 
-      "tags": "", 
-      "description": "Estacion de ferrocarril Belgrano"
-    }
-  }, 
-  {
     "pk": 3, 
     "model": "maap.maapcategory", 
     "fields": {
@@ -307,17 +291,6 @@
       "lft": 6, 
       "tree_id": 5, 
       "slug": "choris"
-    }
-  }, 
-  {
-    "pk": 1, 
-    "model": "maap.maappoint", 
-    "fields": {
-      "category": [
-        6
-      ], 
-      "icon": 125, 
-      "point": "POINT (-7144014.8640786996111274 -3687580.2187864999286830)"
     }
   }, 
   {

@@ -1,6 +1,8 @@
 from django.contrib.gis.db import models
 from django.db import models as dbmodels
 from django.utils import simplejson
+from django.contrib.auth.models import User
+from osm.models import Nodes
 from nomenclador.settings import DEFAULT_SRID
 from tagging.fields import TagField
 import mptt
@@ -11,8 +13,8 @@ class MaapModel(models.Model):
     description = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True, editable = False)
     changed = models.DateTimeField(auto_now=True, editable = False)
-    creator = models.CharField(max_length=20, blank= True) #XXX FIXME Should be a relation to users, should be autoset at creation
-    editor = models.CharField(max_length=20, blank= True) #XXX FIXME Should be a relation to users, should be autoset at edition
+    creator = models.ForeignKey('auth.User', related_name='creators',editable = False) 
+    editor = models.ForeignKey('auth.User',related_name='editors', editable = False)
     tags = TagField()
     category = models.ManyToManyField('MaapCategory', null=True, blank=True, related_name='maapmodel_set')
     objects = models.GeoManager()
@@ -75,7 +77,45 @@ class MaapPoint(MaapModel):
         out['geojson'] = simplejson.loads(self.point.geojson)
        
         return out
-   
+
+class MaapArea(MaapModel):
+    geom = models.PolygonField(srid=DEFAULT_SRID)
+
+
+    def getBoxExtent(self):
+        return self.geom.extent
+    
+    @property
+    def json_dict(self):
+        out = super(MaapArea, self).json_dict
+        out.pop('geom')
+        out['type'] = 'area'
+        out['geojson'] = simplejson.loads(self.geom.geojson)
+       
+        return out
+
+class MaapOSMArea(MaapArea):
+    nodes_covered = models.ManyToManyField('osm.Nodes', editable=False)
+
+    def save(self, force_insert=False, force_update=False):
+        super(MaapOSMArea, self).save(force_insert, force_update)
+        self.nodes_covered = Nodes.objects.filter(geom__coveredby= self.geom)
+
+
+class MaapMultiline(MaapModel):
+    geom = models.MultiLineStringField(srid=DEFAULT_SRID)
+
+    def getBoxExtent(self):
+        return self.geom.extent
+
+    @property
+    def json_dict(self):
+        out = super(MaapArea, self).json_dict
+        out.pop('geom')
+        out['type'] = 'multiline'
+        out['geojson'] = simplejson.loads(self.geom.geojson)
+
+
 class Icon(models.Model):
     name = models.CharField(max_length=100 )
     image = models.ImageField(upload_to="icons" )
