@@ -24,28 +24,16 @@ class MaapModel(models.Model):
 
     def __unicode__(self):
         return self.name
-        
-    def getBoxExtent(self):
-        """ Need to be defined by particular model """
-        pass
-#        points = self.point_set.all()  
-#        if points:
-#            extent = points[0].point
-#            for i in range(1,len(points)):
-#                extent = extent.union(points[i].point)
-#            return extent.extent
-    
+  
     @property
     def json_dict(self):
         out = dict.copy(self.__dict__)
-        out['box_size'] = self.getBoxExtent()
         out['created'] = self.created.strftime('%D %T')        
         out['changed'] = self.changed.strftime('%D %T')	        
 
         return out
 
 class MaapCategory(models.Model):
-    #id = models.CharField(max_length=35, primary_key=True)
     slug = models.SlugField(unique=True)
     name = models.CharField(max_length=35)
     parent = models.ForeignKey('self', null=True, blank=True, related_name='children')    
@@ -62,29 +50,22 @@ class MaapCategory(models.Model):
 
 class MaapPoint(MaapModel):
 
-    point = models.PointField(srid=DEFAULT_SRID)
+    geom = models.PointField(srid=DEFAULT_SRID)
     icon = models.ForeignKey('Icon')
-    
-    def getBoxExtent(self):
-        return self.point.extent
     
     @property
     def json_dict(self):
         out = super(MaapPoint, self).json_dict
-        out.pop('point')
+        out.pop('geom')
         out['type'] = 'point'
         out['icon'] = self.icon.json_dict
-        out['geojson'] = simplejson.loads(self.point.geojson)
+        out['geojson'] = simplejson.loads(self.geom.geojson)
        
         return out
 
 class MaapArea(MaapModel):
     geom = models.PolygonField(srid=DEFAULT_SRID)
-
-
-    def getBoxExtent(self):
-        return self.geom.extent
-    
+   
     @property
     def json_dict(self):
         out = super(MaapArea, self).json_dict
@@ -102,20 +83,18 @@ class MaapOSMArea(MaapArea):
         self.nodes_covered = Nodes.objects.filter(geom__coveredby= self.geom)
 
 
-class MaapMultiline(MaapModel):
+class MaapMultiLine(MaapModel):
     geom = models.MultiLineStringField(srid=DEFAULT_SRID)
-
-    def getBoxExtent(self):
-        return self.geom.extent
 
     @property
     def json_dict(self):
-        out = super(MaapArea, self).json_dict
+        out = super(MaapMultiLine, self).json_dict
         out.pop('geom')
         out['type'] = 'multiline'
         out['geojson'] = simplejson.loads(self.geom.geojson)
 
-
+        return out
+        
 class Icon(models.Model):
     name = models.CharField(max_length=100 )
     image = models.ImageField(upload_to="icons" )
