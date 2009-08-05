@@ -7,7 +7,7 @@ from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic.list_detail import object_list, object_detail
 from osm.models import *
-from models import MaapModel, MaapPoint, Icon, MaapCategory
+from models import MaapModel, MaapPoint, MaapArea, MaapMultiLine, Icon, MaapCategory
 
 from tagging.models import TaggedItem, Tag
 
@@ -185,16 +185,33 @@ def park_list(request):
     return object_list(request, parks, template_name='maap/park_list.html')
     
 def json_layer(qset):
-    points = [ mo.maappoint for mo in qset]
-    if points:
-        extent = points[0].point
-        for i in range(1,len(points)):
-            extent = extent.union(points[i].point)
-        box_size = extent.extent    
+    objects = []
+    for mo in qset:
+        try:
+            objects.append(mo.maappoint)
+            continue
+        except MaapPoint.DoesNotExist:
+            pass
+        try:
+            objects.append(mo.maapmultiline)
+            continue
+        except MaapMultiLine.DoesNotExist:
+            pass
+        try:
+            objects.append(mo.maaparea)
+            continue
+        except MaapArea.DoesNotExist:
+            pass
+
+    if objects:
+        geom = objects[0].geom
+        for i in range(1,len(geom)):
+            geom = geom.union(objects[i].geom)
+        box_size = geom.extent
     else:
         box_size = ''
     
-    json_results = [p.json_dict for p in points]
+    json_results = [o.json_dict for o in objects]
     layer = {
         'type': 'layer',
         'id': 'layer-object-%s' % 'layer',
