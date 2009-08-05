@@ -1,3 +1,4 @@
 *.~
 *.pyc
-*.egg-info
+maap.egg-info/
+maap.egg-info/*.*

@@ -1,0 +1,52 @@
+{% extends 'maap/base.html' %}
+{% block title %}
+Bienvenido
+{% endblock %}
+{% block css%}
+{% endblock %}
+
+{% block js_onload %}
+        // Show layer event handler
+        $('.show-layer').click(function () {
+            button = $(this)
+            parent = button.parent()
+            id = parent.attr('id');
+            state.loadLayer(id, false, function(layer){
+                layer.show();
+
+                // toogle view
+                parent.children('.hide-layer').css('display','inline');
+                button.css('display','none');
+            
+            });
+            
+            return false;
+        })
+
+        // Hide layer event handler
+        $('.hide-layer').click(function () {
+            parent = $(this).parent()
+            id = parent.attr('id');
+            
+            state.layers[id].hide();   
+
+            // toogle view
+            parent.children('.show-layer').css('display','inline');
+            $(this).css('display','none');
+            
+            return false;
+        })
+{% endblock %}
+
+</head>
+<body>
+
+{% block content %}
+
+{% endblock %}
+
+
+</body>
+</body>
+
+
