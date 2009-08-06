@@ -83,40 +83,37 @@ function hideMarker(marker_index,layer) {
 -------------
 */
 
-// Initialization function for object Point
-Maap.Point = function(id, metadata) {
-    this.id = id;
-    this.metadata = metadata;
-    this.createMarker();
-}
 
 // Methods and extra attributes for object Point
-Maap.Point.prototype = {
-    createMarker: function() {
+Maap.Point = Maap.extend(Maap.Geom, {
+    init: function() {
         size = new OpenLayers.Size(this.metadata.icon.width, this.metadata.icon.height);
         offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
         icon = new OpenLayers.Icon(this.metadata.icon.url, size, offset);
         lonlat = new OpenLayers.LonLat(this.metadata.geojson.coordinates[0],this.metadata.geojson.coordinates[1]);
-        this.marker = new OpenLayers.Marker(lonlat, icon);
+        marker = new OpenLayers.Marker(lonlat, icon);
+        this.layer = new OpenLayers.Layer.Markers();     
+        this.layer.addMarker(marker);    
     }
-}
+})
 
-// Extends Maap.Layer functionality: Add Point
-Maap.Layer.prototype.loadPoint = function(pointid, callback) {
-    state = this;
 
-    //send request to server for get the point to add 
-    $.getJSON('point/'+pointid+'/', 
-        function(data) {
-            // Eval point object
-            elements = data.elements                
-            Point = new Point(data.id, data);          
-            callback(Point);
-        }
-    );
+// Extends Maap.State functionality: Add Layer
+//Maap.State.prototype.loadPoint = function(pointid, callback) {
+//    state = this;
+
+    //send request to server for get the layer to add 
+//    $.getJSON('/maap/json/point/'+pointid+'/', 
+//        function(data) {
+            // Eval layer object
+//            elements = data.elements                
+//            Point = new Point(data.id, data);          
+//           callback(Layer);
+//        }
+//    );
     
-    return 0;
-};
+//    return 0;
+//};
 
 
 

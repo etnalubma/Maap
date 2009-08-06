@@ -83,40 +83,37 @@ function hideMarker(marker_index,layer) {
 -------------
 */
 
-// Initialization function for object Point
-Maap.Point = function(id, metadata) {
-    this.id = id;
-    this.metadata = metadata;
-    this.createMarker();
-}
 
 // Methods and extra attributes for object Point
-Maap.Point.prototype = {
-    createMarker: function() {
-        size = new OpenLayers.Size(this.metadata.icon.width, this.metadata.icon.height);
+Maap.Point = Maap.extend(Maap.Geom, {
+    init: function() {
+        size = new OpenLayers.Size(this.icon.width, this.icon.height);
         offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-        icon = new OpenLayers.Icon(this.metadata.icon.url, size, offset);
-        lonlat = new OpenLayers.LonLat(this.metadata.geojson.coordinates[0],this.metadata.geojson.coordinates[1]);
-        this.marker = new OpenLayers.Marker(lonlat, icon);
+        icon = new OpenLayers.Icon(this.icon.url, size, offset);
+        lonlat = new OpenLayers.LonLat(this.geojson.coordinates[0],this.geojson.coordinates[1]);
+        marker = new OpenLayers.Marker(lonlat, icon);
+        this.layer = new OpenLayers.Layer.Markers();     
+        this.layer.addMarker(marker);    
     }
-}
+})
+
 
 // Extends Maap.State functionality: Add Layer
-Maap.State.prototype.loadPoint = function(pointid, callback) {
-    state = this;
+//Maap.State.prototype.loadPoint = function(pointid, callback) {
+//    state = this;
 
     //send request to server for get the layer to add 
-    $.getJSON('/maap/json/point/'+pointid+'/', 
-        function(data) {
+//    $.getJSON('/maap/json/point/'+pointid+'/', 
+//        function(data) {
             // Eval layer object
-            elements = data.elements                
-            Point = new Point(data.id, data);          
-            callback(Layer);
-        }
-    );
+//            elements = data.elements                
+//            Point = new Point(data.id, data);          
+//           callback(Layer);
+//        }
+//    );
     
-    return 0;
-};
+//    return 0;
+//};
 
 
 

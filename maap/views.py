@@ -202,10 +202,10 @@ def json_layer(qset):
             continue
         except MaapArea.DoesNotExist:
             pass
-
+    
     if objects:
         geom = objects[0].geom
-        for i in range(1,len(geom)):
+        for i in range(1,len(objects)):
             geom = geom.union(objects[i].geom)
         box_size = geom.extent
     else:

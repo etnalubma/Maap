@@ -8,64 +8,52 @@
 -------------
 */
 // Initialization function for object Layer
-Maap.Layer = function (id, metadata) {    
-    this.id = id;
-    this.metadata = metadata;
+Maap.Layer = function (metadata) {
+    for (m in metadata) {
+        this[m] = metadata[m];
+    }
+    var elms = new Array();
     
-    this.elements = new Array();
-    elm = this.metadata.elements;
-    
-    for (i=0;i< elm.length; i++) {
-        if (elm[i].type == 'point') {
-            id = 'point-'+elm[i].id;
-            this.elements[i] = new Maap.Point(id, elm[i])
+    for (i=0;i< this.elements.length; i++) {
+        if (this.elements[i].type == 'point') {
+            elms.push(new Maap.Point(this.elements[i]))
+        } else if (this.elements[i].type == 'multiline') {
+            elms.push(new Maap.MultiLine(this.elements[i]))
         }
-    }
-    if (self.elements.length > 0) {
-        this.createMarkersLayer()
-    }
+    };
+    
+    this.elements = elms;
+   
 }
 
 // Methods and extra attributes for object Layer
 Maap.Layer.prototype = {
-    base_layers: [],
-    
-    createMarkersLayer: function() {
-        markersLayer = new OpenLayers.Layer.Markers()
-        for (i=0;i<this.elements.length; i++) {
-            markersLayer.addMarker(this.elements[i].marker);
-        }
-        // append markers layer to base_layers
-        this.base_layers = this.base_layers.concat(markersLayer);
-    },
     
     boxCenter: function() {
-        b = this.metadata.box_size
+        b = this.box_size
         map.zoomToExtent(new OpenLayers.Bounds(b[0],b[1],b[2],b[3]),true)
     },
     
     getLayers: function() {
-        return this.base_layers;
+        out = new Array();
+        for (i=0; i < this.elements.length; i++) {
+            out.push(this.elements[i].layer);
+        };
+        return out;
     },
     
     show: function() {
-        for (var layer in this.base_layers) {
-            this.base_layers[layer].setVisibility(true)
-            this.boxCenter()
-        }
+        for (i=0; i< this.elements.length; i++) {
+            this.elements[i].show();
+        };
+        this.boxCenter();
     },
     
     hide: function() {
-        for (var layer in this.base_layers) {
-            this.base_layers[layer].setVisibility(false)
+        for (i=0; i< this.elements.length; i++) {
+            this.elements[i].hide();
         }
     },
-    addPoint: function(point) {
-        this.elements[this.elements.length] = point;
-        if (self.elements.length == 1) {
-            this.createMarkersLayer()
-        }
-    }
 }
 
 
@@ -77,8 +65,7 @@ Maap.State.prototype.loadLayer = function(url, reload, callback) {
     $.getJSON(url, 
         function(data) {
             // Eval layer object
-            elements = data.elements                
-            Layer = new Maap.Layer(data.id, data);          
+            Layer = new Maap.Layer(data);          
             state.map.addLayers(Layer.getLayers());
             state.layers[Layer.id] = Layer;
             callback(Layer);
